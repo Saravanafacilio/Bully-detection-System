@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="static/css/materialize.min.css" media="screen,projection" />
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<style>
+	.results {
+		padding: 70px;
+		border: 2px solid #4CAF50;
+		height: 280px;
+		width: 350px;
+		margin-left: 450px;
+
+	}
+
+	.success {
+		height: 100px;
+		width: 15%;
+
+	}
+
+	body {
+		background-color: #F1F1F1;
+	}
+
+	/* //popup model */
+
+/*
+	*{
+  margin: 0;
+  padding: 0;
+
+}
+html,body{
+  font-family: tahoma;
+  font-size: 17px;
+
+}
+
+.container{
+  background-color: #34495e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+
+
+}
+
+.button{
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 599;
+  text-transform: uppercase;
+  display: inline-block;
+  border-radius: 1.5rem;
+  background-color: #fff;
+  color: #000;
+  padding: 1rem 2rem;
+
+}
+.popup{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.80);
+  z-index: 2;
+  visibility: hidden;
+  opacity: 0;
+  overflow: hidden;
+  transition: 0.74s ease-in-out;
+
+}
+.popup-inner{
+  position: relative;
+  bottom:  -100vw;
+  right: -100vh;
+  display: flex;
+  align-items: center;
+  max-width: 800px;
+  max-height: 599px;
+  width: 59%;
+  height: 80%;
+background-color: #fff;
+  transform: rotate(32deg);
+  transition: 0.74s ease-in-out;
+}
+
+.popup-photo{
+  display: flex;
+  justify-content: flex-end;
+  align-content: flex-end;
+  width: 45%;
+  height: 100%;
+  overflow: hidden;
+
+}
+.popup-photo img{
+  width: 100%;
+height: auto;
+
+}
+.popup-text{
+  display: flex;
+flex-direction: column;
+  justify-content: center;
+  width: 59%;
+height: 100%;
+  padding: 4rem;
+
+}
+.popup-text h1{
+  font-size: 2rem;
+  font-weight: 599;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  color: #0a0a0a;
+}
+
+.popup-text p{
+  font-size: 0.875rem;
+color: #000;
+  line-height: 1.5;
+}
+#popup:target{
+  visibility: visible;
+  opacity: 1;
+}
+#popup:target .popup-inner{
+  bottom: 0;
+  right: 0;
+  transform: rotate(0);
+
+}
+
+.popup-close{
+  position: absolute;
+  right: -1rem;
+  top: -1rem;
+  width: 3rem;
+  height: 3rem;
+  font-size: 0.875rem;
+  font-size: 400;
+  background-color: #0a0a0a;
+  border-radius: 100%;
+  z-index: 4;
+  line-height: 3rem;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+
+} */
+</style>
+
+<body>
+
+
+
+	<header>
+		<div class="container">
+			<div id="brandname">
+
+			</div>
+<!--			<h2 style="margin-left: 70px;font-size:50px">Text Analysis For Cyber-Bullying</h2>-->
+
+		</div>
+	</header>
+	<br>
+	<h5 style="color:#274556;font-size:30px;margin-left: 500px;"><b>Results for Comment</b></h5>
+	<div class="results">
+
+
+
+		{% if prediction == 1%}
+
+
+<!--		<div class="container">-->
+<!--		      &lt;!&ndash; <a href="#popup" class="button">open modal</a> &ndash;&gt;-->
+<!--		      <div class="popup" id="popup">-->
+<!--		        <div class="popup-inner">-->
+<!--		          <a class="popup-close" href="#">X</a>-->
+<!--		          <div class="popup-photo">-->
+<!--		            <img src="https://i.postimg.cc/vm9YTFV4/Mind-the-Gap-069.png" alt="">-->
+
+<!--		            </div>-->
+<!--		          <div class="popup-text">-->
+<!--		            <h1>LOREM IPSUM NESTO NESTO XDDD</h1>-->
+<!--		            <p>-->
+<!--		              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.-->
+<!--		            </p>-->
+<!--		            </div>-->
+<!--		          </div>-->
+<!--		        </div>-->
+<!--		    </div>-->
+		<h5 style="color:red;margin-left: -50px;margin-top: -20px;">Bullying:<p style="color: black;font-size: 25px;">
+				<center>
+
+					 <img class="success" src="images2.png" alt="image-mockup">
+
+				 </center>Your comments have the offensive words. So try to remove this words.
+			</p>
+		</h5>
+
+		{% elif prediction == 0%}
+		 <h5 style="color:blue;margin-left: -50px;margin-top: -20px;">Non-Bullying:<p style="color: black;font-size: 25px;">
+				<center>
+
+					 <img class="success" src="images/success.png" alt="image-mockup">
+				</center>
+				Your comments does not have any the offensive words. So Enjoy!!!!.
+			</p>
+		</h5>
+
+
+<!--				<div class="container">-->
+<!--				      &lt;!&ndash; <a href="#popup" class="button">open modal</a> &ndash;&gt;-->
+<!--				      <div class="popup" id="popup">-->
+<!--				        <div class="popup-inner">-->
+<!--				          <a class="popup-close" href="#">X</a>-->
+<!--				          <div class="popup-photo">-->
+<!--				            <img src="https://i.postimg.cc/vm9YTFV4/Mind-the-Gap-069.png" alt="">-->
+
+<!--				            </div>-->
+<!--				          <div class="popup-text">-->
+<!--				            <h1>LOREM IPSUM NESTO NESTO XDDD</h1>-->
+<!--				            <p>-->
+<!--				              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.-->
+<!--				            </p>-->
+<!--				            </div>-->
+<!--				          </div>-->
+<!--				        </div>-->
+<!--				    </div>-->
+		{% endif %}
+
+	</div>
+
+</body>
+
+</html>

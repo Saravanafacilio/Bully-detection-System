@@ -1,0 +1,99 @@
+<html>
+    <head>
+        <title>Flask-SocketIO-Chat: {{ room }}</title>
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="//cdn.socket.io/4.4.1/socket.io.min.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            var socket;
+            $(document).ready(function(){
+                socket = io.connect('http://' + document.domain + ':' + location.port + '/chat');
+                socket.on('connect', function() {
+                    socket.emit('joined', {});
+                });
+                socket.on('status', function(data) {
+                    $('#chat').val($('#chat').val() + '<' + data.msg + '>\n');
+                    $('#chat').scrollTop($('#chat')[0].scrollHeight);
+                });
+                socket.on('text', function(data) {
+    var sender = 'Other';
+    var message = data.msg;
+    $('#chat').val($('#chat').val() + sender + ': ' + message + '\n');
+    $('#chat').scrollTop($('#chat')[0].scrollHeight);
+});
+
+                $('#text').keypress(function(e) {
+                    if (e.which == 13 && !e.shiftKey) {
+                        e.preventDefault();
+                        var text = $('#text').val();
+                        $('#text').val('');
+                        socket.emit('text', {msg: text});
+                        $('#chat').val($('#chat').val() + 'Me: ' + text + '\n');
+                        $('#chat').scrollTop($('#chat')[0].scrollHeight);
+                    }
+                });
+            });
+            function leave_room() {
+                socket.emit('left', {}, function() {
+                    socket.disconnect();
+
+                    // go back to the login page
+                    window.location.href = "{{ url_for('main.index') }}";
+                });
+            }
+        </script>
+        <style media="screen">
+          body {
+            text-align: center;
+            background-color: #F6F1F1;
+
+          }
+
+          h1 {
+            color: red;
+          }
+
+          h2 {
+            color: green;
+          }
+
+          #chat {
+            color: #3A1078;
+            background-color: #f2f2f2;
+          }
+
+          #text {
+            height: 5%;
+          }
+
+          button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+          }
+        </style>
+    </head>
+    <body>
+        <h1>Chat Room : {{ room }}</h1>
+        <textarea name = "message" id="chat" cols="80" rows="20"></textarea><br><br>
+
+
+        <div class="ml-container">
+
+            <form action="{{ url_for('predict')}}" method="POST">
+                <br>
+                <input type="text" name="message" id="text" size="80" placeholder="Enter your message here"><br><br>
+                <input type="submit" class="btn-info btn-success" value="DETECT">
+            </form>
+
+        </div>
+
+        <a href="#" onclick="leave_room();">Leave this room</a>
+    </body>
+</html>
